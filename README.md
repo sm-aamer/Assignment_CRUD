@@ -1,10 +1,10 @@
-# Hospital Management System
+# Patients Management System
 
 A simple FastAPI-based Patients Management System with CRUD endpoints for patients.
 
 ## Project Structure
 
-HospitalManagement/
+Patients_Management_System/
 │
 ├── app/
 │   ├── main.py
