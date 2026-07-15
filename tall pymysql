@@ -1,0 +1,10 @@
+[33m3240f53[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m env.py file modify and check migration
+[33ma507a03[m patients model create
+[33m5750910[m alembic env file modify
+[33m4be69bd[m database file create and mofify
+[33m66d8a19[m config file create and modify
+[33m7aa3341[m app folder modify
+[33m8819a5c[m modify alembic env file
+[33m528d5ed[m alembic file and folder initialize
+[33ma1b22af[m .gitignore and .env files create and update
+[33m75945f3[m readme.md file create
