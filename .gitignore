@@ -4,3 +4,7 @@ alembic/__pycache__/
 alembic/versions/
 app/core/__pycache__/
 app/model/__pycache__/
+app/schemas/__pycache__/patients.cpython-313.pyc
+app/routes/__pycache__/patients.cpython-313.pyc
+app/crud/__pycache__/patients.cpython-313.pyc
+app/__pycache__/main.cpython-313.pyc

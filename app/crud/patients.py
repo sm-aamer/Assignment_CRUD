@@ -1,43 +1,50 @@
+from typing import Any
+
 from sqlalchemy.orm import Session
-
 from app.model.patients import Patients
-from app.schemas.patients import PatientCreate, PatientUpdate
-
-
-def get_patient(db: Session, patient_id: int):
-    return db.query(Patients).filter(Patients.id == patient_id).first()
-
-
-def get_patients(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(Patients).offset(skip).limit(limit).all()
+from app.schemas.patients import PatientCreate, PatientResponse
 
 
 def create_patient(db: Session, patient: PatientCreate):
-    db_patient = Patients(**patient.model_dump())
+    db_patient = Patients(
+        name=patient.name, 
+        age=patient.age, 
+        description=patient.description
+        )
     db.add(db_patient)
     db.commit()
     db.refresh(db_patient)
     return db_patient
 
+def get_patient(db: Session):
+    return db.query(Patients).all()
 
-def update_patient(db: Session, patient_id: int, patient: PatientUpdate):
-    db_patient = get_patient(db, patient_id)
-    if not db_patient:
+
+def get_patients(db: Session, patient_id: int):
+    return db.query(Patients).filter(
+        Patients.id == patient_id
+        ).first()
+
+def update_patient(
+        db: Session, 
+        patient_id: int, 
+        patient: PatientCreate):
+    patient_db = get_patients(db, patient_id)
+    if not patient_db:
         return None
-
-    for key, value in patient.model_dump(exclude_unset=True).items():
-        setattr(db_patient, key, value)
-
+    patient_db.name = patient.name
+    patient_db.age = patient.age
+    patient_db.description = patient.description
+    
     db.commit()
-    db.refresh(db_patient)
-    return db_patient
-
+    db.refresh(patient_db)
+    
+    return patient_db
 
 def delete_patient(db: Session, patient_id: int):
-    db_patient = get_patient(db, patient_id)
-    if not db_patient:
+    patient_db = get_patients(db, patient_id)
+    if not patient_db:
         return None
-
-    db.delete(db_patient)
+    db.delete(patient_db)
     db.commit()
-    return db_patient
+    return patient_db
